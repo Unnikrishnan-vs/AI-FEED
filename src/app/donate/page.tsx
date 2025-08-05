@@ -30,8 +30,8 @@ const donationSchema = z.object({
   foodType: z.string().min(3, 'Food type must be at least 3 characters'),
   quantity: z.coerce.number().positive('Quantity must be a positive number'),
   location: z.string().min(3, 'Location must be at least 3 characters'),
-  latitude: z.coerce.number().min(-90).max(90),
-  longitude: z.coerce.number().min(-180).max(180),
+  donorLatitude: z.coerce.number().min(-90).max(90),
+  donorLongitude: z.coerce.number().min(-180).max(180),
 });
 
 type DonationFormValues = z.infer<typeof donationSchema>;
@@ -56,8 +56,8 @@ export default function DonatePage() {
       foodType: 'Cooked Meals',
       quantity: 50,
       location: 'Mumbai',
-      latitude: 19.076,
-      longitude: 72.8777,
+      donorLatitude: 19.076,
+      donorLongitude: 72.8777,
     },
   });
 
@@ -155,7 +155,7 @@ export default function DonatePage() {
                    <div className="grid grid-cols-2 gap-4">
                      <FormField
                         control={form.control}
-                        name="latitude"
+                        name="donorLatitude"
                         render={({ field }) => (
                           <FormItem>
                             <FormLabel>Latitude</FormLabel>
@@ -168,7 +168,7 @@ export default function DonatePage() {
                       />
                       <FormField
                         control={form.control}
-                        name="longitude"
+                        name="donorLongitude"
                         render={({ field }) => (
                           <FormItem>
                             <FormLabel>Longitude</FormLabel>
