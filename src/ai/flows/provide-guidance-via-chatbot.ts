@@ -21,7 +21,15 @@ const ProvideGuidanceViaChatbotOutputSchema = z.object({
 export type ProvideGuidanceViaChatbotOutput = z.infer<typeof ProvideGuidanceViaChatbotOutputSchema>;
 
 export async function provideGuidanceViaChatbot(input: ProvideGuidanceViaChatbotInput): Promise<ProvideGuidanceViaChatbotOutput> {
-  return provideGuidanceViaChatbotFlow(input);
+  try {
+    return await provideGuidanceViaChatbotFlow(input);
+  } catch (error) {
+    console.error('Error in provideGuidanceViaChatbot:', error);
+    // Return a fallback response when AI is unavailable
+    return {
+      response: 'I apologize, but I\'m currently experiencing technical difficulties. Please try again later or contact support for immediate assistance.',
+    };
+  }
 }
 
 const provideGuidanceViaChatbotPrompt = ai.definePrompt({
@@ -42,7 +50,12 @@ const provideGuidanceViaChatbotFlow = ai.defineFlow(
     outputSchema: ProvideGuidanceViaChatbotOutputSchema,
   },
   async input => {
-    const {output} = await provideGuidanceViaChatbotPrompt(input);
-    return output!;
+    try {
+      const {output} = await provideGuidanceViaChatbotPrompt(input);
+      return output!;
+    } catch (error) {
+      console.error('Error in AI flow:', error);
+      throw error;
+    }
   }
 );

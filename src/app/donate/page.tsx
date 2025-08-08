@@ -78,10 +78,10 @@ export default function DonatePage() {
         throw new Error('No suitable match found.');
       }
     } catch (error) {
-      console.error(error);
+      console.error('Donation matching error:', error);
       setMatchResult({
         status: 'error',
-        message: 'No match found. Please try again later.',
+        message: 'Unable to find a match at this time. Please try again later.',
       });
     } finally {
       setIsLoading(false);
@@ -99,20 +99,16 @@ export default function DonatePage() {
                 Donate Food
               </CardTitle>
               <CardDescription>
-                Fill out the form to donate surplus food and get matched with a
-                recipient.
+                Share your surplus food with those in need. Our AI will help match you with the right recipients.
               </CardDescription>
             </div>
           </div>
         </CardHeader>
         <CardContent>
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid gap-8 md:grid-cols-2">
             <div>
               <Form {...form}>
-                <form
-                  onSubmit={form.handleSubmit(onSubmit)}
-                  className="space-y-6"
-                >
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                   <FormField
                     control={form.control}
                     name="foodType"
@@ -120,7 +116,7 @@ export default function DonatePage() {
                       <FormItem>
                         <FormLabel>Food Type</FormLabel>
                         <FormControl>
-                          <Input placeholder="e.g., Cooked meals" {...field} />
+                          <Input placeholder="e.g., Cooked Meals, Bread, Vegetables" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -131,9 +127,9 @@ export default function DonatePage() {
                     name="quantity"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Quantity (servings)</FormLabel>
+                        <FormLabel>Quantity</FormLabel>
                         <FormControl>
-                          <Input type="number" placeholder="e.g., 50" {...field} />
+                          <Input type="number" placeholder="e.g., 50 servings" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -146,41 +142,40 @@ export default function DonatePage() {
                       <FormItem>
                         <FormLabel>Location</FormLabel>
                         <FormControl>
-                          <Input placeholder="e.g., Mumbai" {...field} />
+                          <Input placeholder="e.g., Mumbai, Maharashtra" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
                     )}
                   />
-                   <div className="grid grid-cols-2 gap-4">
-                     <FormField
-                        control={form.control}
-                        name="donorLatitude"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Latitude</FormLabel>
-                            <FormControl>
-                              <Input type="number" step="any" {...field} />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                      <FormField
-                        control={form.control}
-                        name="donorLongitude"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Longitude</FormLabel>
-                            <FormControl>
-                              <Input type="number" step="any" {...field} />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                   </div>
-
+                  <div className="grid grid-cols-2 gap-4">
+                    <FormField
+                      control={form.control}
+                      name="donorLatitude"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Latitude</FormLabel>
+                          <FormControl>
+                            <Input type="number" step="any" placeholder="19.076" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="donorLongitude"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Longitude</FormLabel>
+                          <FormControl>
+                            <Input type="number" step="any" placeholder="72.8777" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
                   <Button type="submit" className="w-full" disabled={isLoading}>
                     {isLoading ? (
                       <>
@@ -188,7 +183,7 @@ export default function DonatePage() {
                         Finding Match...
                       </>
                     ) : (
-                      'Find Match'
+                      'Find Recipients'
                     )}
                   </Button>
                 </form>
@@ -226,19 +221,43 @@ export default function DonatePage() {
                   </AlertDescription>
                 </Alert>
               )}
-              <div className="rounded-lg overflow-hidden border p-1">
-                <div className="flex items-center gap-2 text-sm p-2 text-muted-foreground">
+              <div className="rounded-lg overflow-hidden border p-4 bg-gradient-to-br from-green-50 to-blue-50">
+                <div className="flex items-center gap-2 text-sm p-2 text-muted-foreground mb-3">
                     <MapPin className="w-4 h-4 text-primary" />
-                    <span>Donor's Location</span>
+                    <span>Donation Information</span>
                 </div>
-                <Image
-                  src="https://placehold.co/300x200.png"
-                  width={300}
-                  height={200}
-                  alt="Donor location map"
-                  className="w-full h-auto"
-                  data-ai-hint="map donor location"
-                />
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between p-3 bg-white rounded-lg shadow-sm">
+                    <div className="flex items-center gap-2">
+                      <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                      <span className="text-sm font-medium">Active Donors</span>
+                    </div>
+                    <span className="text-lg font-bold text-green-600">127</span>
+                  </div>
+                  <div className="flex items-center justify-between p-3 bg-white rounded-lg shadow-sm">
+                    <div className="flex items-center gap-2">
+                      <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
+                      <span className="text-sm font-medium">This Week</span>
+                    </div>
+                    <span className="text-lg font-bold text-blue-600">45kg</span>
+                  </div>
+                  <div className="flex items-center justify-between p-3 bg-white rounded-lg shadow-sm">
+                    <div className="flex items-center gap-2">
+                      <div className="w-3 h-3 bg-orange-500 rounded-full"></div>
+                      <span className="text-sm font-medium">Total Impact</span>
+                    </div>
+                    <span className="text-lg font-bold text-orange-600">2.3k</span>
+                  </div>
+                </div>
+                <div className="mt-4 p-3 bg-blue-50 rounded-lg">
+                  <h4 className="font-semibold text-sm mb-2">💡 Donation Tips</h4>
+                  <ul className="text-xs space-y-1 text-muted-foreground">
+                    <li>• Ensure food is properly packaged</li>
+                    <li>• Include expiration dates</li>
+                    <li>• Specify dietary restrictions</li>
+                    <li>• Update location for better matching</li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>

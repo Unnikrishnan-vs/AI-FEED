@@ -96,19 +96,60 @@ export default function DashboardPage() {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="rounded-lg overflow-hidden border">
-              <Image
-                src="https://placehold.co/600x400.png"
-                width={600}
-                height={400}
-                alt="Delivery route map"
-                className="w-full h-auto"
-                data-ai-hint="map delivery route"
-              />
+            <div className="rounded-lg overflow-hidden border p-4 bg-gradient-to-br from-blue-50 to-green-50">
+              <div className="space-y-4">
+                <div className="flex items-center justify-between p-3 bg-white rounded-lg shadow-sm">
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm font-bold">A</div>
+                    <div>
+                      <p className="font-medium text-sm">Pickup Location</p>
+                      <p className="text-xs text-muted-foreground">City Bistro, Mumbai</p>
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-sm font-medium">10:30 AM</p>
+                    <p className="text-xs text-muted-foreground">Today</p>
+                  </div>
+                </div>
+                
+                <div className="flex justify-center">
+                  <div className="w-0.5 h-8 bg-gray-300"></div>
+                </div>
+                
+                <div className="flex items-center justify-between p-3 bg-white rounded-lg shadow-sm">
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white text-sm font-bold">B</div>
+                    <div>
+                      <p className="font-medium text-sm">Delivery Location</p>
+                      <p className="text-xs text-muted-foreground">Hope Shelter, Mumbai</p>
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-sm font-medium">11:15 AM</p>
+                    <p className="text-xs text-muted-foreground">Today</p>
+                  </div>
+                </div>
+                
+                <div className="grid grid-cols-2 gap-3 mt-4">
+                  <div className="p-3 bg-blue-50 rounded-lg text-center">
+                    <p className="text-lg font-bold text-blue-600">2.5km</p>
+                    <p className="text-xs text-muted-foreground">Distance</p>
+                  </div>
+                  <div className="p-3 bg-green-50 rounded-lg text-center">
+                    <p className="text-lg font-bold text-green-600">45min</p>
+                    <p className="text-xs text-muted-foreground">Duration</p>
+                  </div>
+                </div>
+                
+                <div className="mt-4 p-3 bg-yellow-50 rounded-lg">
+                  <div className="flex items-center gap-2 mb-2">
+                    <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
+                    <span className="text-sm font-medium">Status: In Transit</span>
+                  </div>
+                  <p className="text-xs text-muted-foreground">Driver: Rajesh Kumar | Vehicle: MH-01-AB-1234</p>
+                </div>
+              </div>
             </div>
-             <CardDescription className="text-center mt-2">
-                City Bistro to Hope Shelter
-             </CardDescription>
           </CardContent>
         </Card>
 

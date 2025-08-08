@@ -73,9 +73,10 @@ export default function Chatbot() {
       };
       setMessages((prev) => [...prev, botMessage]);
     } catch (error) {
+      console.error('Chatbot error:', error);
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
-        text: 'Sorry, I encountered an error. Please try again.',
+        text: 'Sorry, I encountered an error. Please try again or contact support if the issue persists.',
         sender: 'bot',
       };
       setMessages((prev) => [...prev, errorMessage]);
@@ -88,7 +89,7 @@ export default function Chatbot() {
     <Popover open={isOpen} onOpenChange={setIsOpen}>
       <PopoverTrigger asChild>
         <Button
-          variant="primary"
+          variant="default"
           className="fixed bottom-4 right-4 h-16 w-16 rounded-full shadow-lg"
           size="icon"
         >
