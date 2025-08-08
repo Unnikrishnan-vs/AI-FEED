@@ -37,7 +37,19 @@ export type MatchFoodSupplyAndDemandOutput = z.infer<typeof MatchFoodSupplyAndDe
 export async function matchFoodSupplyAndDemand(
   input: MatchFoodSupplyAndDemandInput
 ): Promise<MatchFoodSupplyAndDemandOutput> {
-  return matchFoodSupplyAndDemandFlow(input);
+  try {
+    return await matchFoodSupplyAndDemandFlow(input);
+  } catch (error) {
+    console.error('Error in matchFoodSupplyAndDemand:', error);
+    // Return a fallback response when AI is unavailable
+    return {
+      match: {
+        recipient: 'Local Food Bank',
+        distance: '2.5km',
+        notes: 'Fallback match due to AI service unavailability. Please contact directly.',
+      },
+    };
+  }
 }
 
 const prompt = ai.definePrompt({
@@ -69,7 +81,12 @@ const matchFoodSupplyAndDemandFlow = ai.defineFlow(
     outputSchema: MatchFoodSupplyAndDemandOutputSchema,
   },
   async input => {
-    const {output} = await prompt(input);
-    return output!;
+    try {
+      const {output} = await prompt(input);
+      return output!;
+    } catch (error) {
+      console.error('Error in AI flow:', error);
+      throw error;
+    }
   }
 );

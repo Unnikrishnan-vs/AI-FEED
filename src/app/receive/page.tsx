@@ -233,19 +233,43 @@ export default function ReceivePage() {
                   </AlertDescription>
                 </Alert>
               )}
-              <div className="rounded-lg overflow-hidden border p-1">
-                <div className="flex items-center gap-2 text-sm p-2 text-muted-foreground">
+              <div className="rounded-lg overflow-hidden border p-4 bg-gradient-to-br from-purple-50 to-pink-50">
+                <div className="flex items-center gap-2 text-sm p-2 text-muted-foreground mb-3">
                     <MapPin className="w-4 h-4 text-primary" />
-                    <span>Recipient's Location</span>
+                    <span>Available Food</span>
                 </div>
-                <Image
-                  src="https://placehold.co/300x200.png"
-                  width={300}
-                  height={200}
-                  alt="Recipient location map"
-                  className="w-full h-auto"
-                  data-ai-hint="map recipient location"
-                />
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between p-3 bg-white rounded-lg shadow-sm">
+                    <div className="flex items-center gap-2">
+                      <div className="w-3 h-3 bg-purple-500 rounded-full"></div>
+                      <span className="text-sm font-medium">Nearby Donors</span>
+                    </div>
+                    <span className="text-lg font-bold text-purple-600">23</span>
+                  </div>
+                  <div className="flex items-center justify-between p-3 bg-white rounded-lg shadow-sm">
+                    <div className="flex items-center gap-2">
+                      <div className="w-3 h-3 bg-pink-500 rounded-full"></div>
+                      <span className="text-sm font-medium">Available Today</span>
+                    </div>
+                    <span className="text-lg font-bold text-pink-600">156kg</span>
+                  </div>
+                  <div className="flex items-center justify-between p-3 bg-white rounded-lg shadow-sm">
+                    <div className="flex items-center gap-2">
+                      <div className="w-3 h-3 bg-indigo-500 rounded-full"></div>
+                      <span className="text-sm font-medium">Avg Distance</span>
+                    </div>
+                    <span className="text-lg font-bold text-indigo-600">2.1km</span>
+                  </div>
+                </div>
+                <div className="mt-4 p-3 bg-purple-50 rounded-lg">
+                  <h4 className="font-semibold text-sm mb-2">🍽️ Food Categories</h4>
+                  <div className="flex flex-wrap gap-2">
+                    <span className="px-2 py-1 bg-green-100 text-green-700 text-xs rounded-full">Cooked Meals</span>
+                    <span className="px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded-full">Bread</span>
+                    <span className="px-2 py-1 bg-orange-100 text-orange-700 text-xs rounded-full">Vegetables</span>
+                    <span className="px-2 py-1 bg-purple-100 text-purple-700 text-xs rounded-full">Dairy</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
